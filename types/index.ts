@@ -7,6 +7,7 @@ export interface ProfileProps {
 export interface ProfilesProps {
   profiles: ProfileProps[];
 }
-export interface UserProps {
-  id: String;
+
+export interface ProfileListProps {
+  isEdit: boolean;
 }

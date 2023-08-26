@@ -1,3 +1,3 @@
-import BrowseProfile from "./BrowseProfile";
+import ProfileList from "./ProfileList";
 
-export { BrowseProfile };
+export { ProfileList };

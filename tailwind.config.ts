@@ -15,7 +15,7 @@ const config: Config = {
       },
       colors: {
         "primary-black": "#141414",
-        "secondary-grey": "grey",
+        "secondary-grey": { DEFAULT: "#808080", 100: "#F5F5F5" },
         "tertiary-white": "#fff",
       },
     },
