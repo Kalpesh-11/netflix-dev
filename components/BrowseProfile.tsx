@@ -1,6 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { profiles } from "@/constants";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { increment, decrement } from "../slices/profilesSlice";
+import { AppDispatch, RootState } from "@/stores/store";
+
 function BrowseProfile() {
+  const { value } = useAppSelector((state) => state.profiles);
+  const dispatch = useAppDispatch();
+  console.log(value);
   return (
     <div className="profiles-container flex flex-col items-center ">
       <h1 className="text-5xl mb-6 text-tertiary-white profiles__title text-center">
@@ -9,7 +18,10 @@ function BrowseProfile() {
       <ul className="profile__lists flex gap-6 text-center">
         {profiles.map((profile) => {
           return (
-            <li key={profile.id}>
+            <li
+              key={profile.id}
+              onClick={() => dispatch(increment(profile.id))}
+            >
               <div className="profile__list-wrap mb-6">
                 <div className="profile__list--image">
                   <Image
@@ -29,7 +41,7 @@ function BrowseProfile() {
         })}
       </ul>
       <button className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10 ">
-        Manage Profiles
+        {value}
       </button>
     </div>
   );
