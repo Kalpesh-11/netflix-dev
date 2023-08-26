@@ -46,6 +46,21 @@ function ProfileList({ isEdit }: ProfileListProps) {
           );
         })}
       </ul>
+      {true !== isEdit ? (
+        <a
+          className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
+          href="/ManageProfile"
+        >
+          Manage Profiles
+        </a>
+      ) : (
+        <a
+          className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
+          href="/"
+        >
+          Done
+        </a>
+      )}
     </div>
   );
 }

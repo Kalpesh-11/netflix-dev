@@ -1,16 +1,14 @@
-import { ProfileList } from "@/components";
-import Image from "next/image";
+"use client";
+import { Hero, ProfileList } from "@/components";
+import { useAppSelector } from "@/hooks";
 
 export default function Home() {
+  const selectedProfileID = useAppSelector(
+    (state) => state.profiles.selectedProfileID
+  );
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <ProfileList />
-      <a
-        className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
-        href="/ManageProfile"
-      >
-        Manage Profiles
-      </a>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      {null === selectedProfileID ? <ProfileList isEdit={false} /> : <Hero />}
     </main>
   );
 }
