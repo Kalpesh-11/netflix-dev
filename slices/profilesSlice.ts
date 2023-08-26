@@ -1,38 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { profiles } from "@/constants";
-// Define a type for the slice state
-export interface CounterState {
-  value: number;
-}
+import { ProfilesProps } from "@/types";
 
-// Define the initial state using that type
-const initialState: CounterState = {
-  value: 1,
+const profileList: ProfilesProps = {
+  profiles,
 };
-
+const selectedProfileID = null;
 export const profilesSlice = createSlice({
-  name: "counter",
+  name: "profiles",
   // `createSlice` will infer the state type from the `initialState` argument
-  initialState,
+  initialState: {
+    profileList,
+    selectedProfileID,
+  },
   reducers: {
-    increment: (state, action) => {
+    setProfile: (state, action) => {
       const { type, data } = action.payload;
-
-      console.log(action.payload);
-      // console.log(data);
-
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+      state.selectedProfileID = action.payload;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } =
-  profilesSlice.actions;
+export const { setProfile } = profilesSlice.actions;
 export default profilesSlice.reducer;
