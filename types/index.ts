@@ -1,7 +1,7 @@
 export interface ProfileProps {
-  id: String;
-  name: String;
-  imgSrc: String;
+  id: string;
+  name: string;
+  imgSrc: string;
   isSelected: boolean;
 }
 export interface ProfilesProps {
@@ -10,4 +10,9 @@ export interface ProfilesProps {
 
 export interface ProfileListProps {
   isEdit: boolean;
+}
+export interface ButtonProps {
+  title: string;
+  icon: React.ReactNode;
+  btnFormat: string;
 }

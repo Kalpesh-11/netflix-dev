@@ -22,6 +22,25 @@ body {
 .profiles-container {
   animation: profileAnimation 0.45s forwards;
 }
+.hero__container {
+  @apply bg-cover w-full bg-center text-tertiary-white;
+  height: 56.75vw;
+}
+.netflix-btn-normal {
+  @apply py-2 px-6 font-bold rounded-md flex justify-center items-center;
+}
+.white-normal {
+  @apply text-black bg-white;
+}
+.grey-normal {
+  @apply text-white bg-secondary-grey/70;
+}
+.white-normal:hover {
+  @apply bg-white/80;
+}
+.grey-normal:hover {
+  @apply bg-secondary-grey/50;
+}
 @keyframes profileAnimation {
   0% {
     transform: scale(1.1);

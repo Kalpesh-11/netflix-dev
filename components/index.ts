@@ -1,4 +1,4 @@
 import ProfileList from "./ProfileList";
 import Hero from "./Hero";
-
-export { ProfileList, Hero };
+import Button from "./Button";
+export { ProfileList, Hero, Button };

@@ -15,15 +15,19 @@ function ProfileList({ isEdit }: ProfileListProps) {
   );
   const dispatch = useAppDispatch();
   return (
-    <div className="profiles-container flex flex-col items-center ">
-      <h1 className="text-5xl mb-6 text-tertiary-white profiles__title text-center">
+    <div className="profiles-container flex flex-col items-center py-[12%] mx-3 ">
+      <h1 className="profiles__title text-3xl mb-6 text-tertiary-white  text-center md:text-5xl">
         {true != isEdit ? "Who's Watching:" : "Manage Profiles:"}
       </h1>
-      <ul className="profile__lists flex gap-6 text-center">
+      <ul className="w-full profile__lists flex justify-center gap-6 text-center flex-wrap">
         {profiles.map((profile, i) => {
           return (
-            <li key={i} onClick={() => dispatch(setProfile(profile.id))}>
-              <div className="profile__list-wrap mb-6 group">
+            <li
+              key={i}
+              onClick={() => dispatch(setProfile(profile.id))}
+              className="w-[10vw] min-w-[130px] min-h-[84px]"
+            >
+              <div className="profile__list-wrap mb-6 group w-full ">
                 <div className="profile__list--image group-hover:ring-1 group-hover:ring-secondary-grey relative">
                   <Image
                     src={profile.imgSrc}
