@@ -27,4 +27,4 @@ This project is a Netflix clone created for educational purposes. It aims to rep
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Axios](https://axios-http.com/) (for API requests)
+- [Axios](https://axios-http.com/) (for API requests )
