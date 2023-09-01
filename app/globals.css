@@ -27,7 +27,7 @@ body {
   height: 56.75vw;
 }
 .netflix-btn-normal {
-  @apply py-2 px-6 font-bold rounded-md flex justify-center items-center;
+  @apply py-1 px-2 font-bold rounded-md flex text-xs justify-center items-center md:py-2 md:px-6 md:text-base;
 }
 .white-normal {
   @apply text-black bg-white;
