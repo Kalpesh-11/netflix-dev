@@ -1,4 +1,4 @@
-import { ProfileProps, RowPros } from "@/types";
+import { ProfileProps, RowProps } from "@/types";
 import axios from "./axios";
 export const getHeroMovie = async () => {
   try {
@@ -20,7 +20,10 @@ export const getProfile = (
   const profile = profiles.find((profile) => profile.id === profileID);
   return profile;
 };
-export const apiRequest = (type: RowPros["type"], genre: RowPros["genre"]) => {
+export const apiRequest = (
+  type: RowProps["type"],
+  genre: RowProps["genre"]
+) => {
   let endpoint;
 
   switch (true) {
@@ -39,14 +42,16 @@ export const apiRequest = (type: RowPros["type"], genre: RowPros["genre"]) => {
   return endpoint;
 };
 export const getData = async (
-  type: RowPros["type"],
-  genre: RowPros["genre"]
+  type: RowProps["type"],
+  genre: RowProps["genre"]
 ) => {
   try {
     const endpoint = apiRequest(type, genre);
     const response = await axios.get(endpoint);
-    const movie = response.data.results[0];
-    return { statusCode: response.status, data: movie };
+    const movie = response.data.results;
+    // console.log(movie);
+
+    return movie;
   } catch (error: any) {
     return {
       statusCode: error.response?.status || 500,

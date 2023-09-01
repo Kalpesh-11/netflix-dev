@@ -16,7 +16,11 @@ export interface ButtonProps {
   icon: React.ReactNode;
   btnFormat: string;
 }
-export interface RowPros {
+export interface RowProps {
+  type: string;
+  genre: string;
+}
+export interface MovieProps {
   type: string;
   genre: string;
 }
