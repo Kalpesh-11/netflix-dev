@@ -3,7 +3,7 @@ const nextConfig = {};
 
 module.exports = {
   images: {
-    domains: ["placehold.co"],
+    domains: ["placehold.co", "image.tmdb.org"],
     dangerouslyAllowSVG: true,
   },
 };

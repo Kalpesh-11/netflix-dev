@@ -30,7 +30,7 @@ function Row({ type, genre }: RowProps) {
       ) : (
         <div>
           {movies && (
-            <div>
+            <div className="flex flex-wrap">
               {movies.map((movie) => {
                 return <MovieCard movie={movie} />;
               })}

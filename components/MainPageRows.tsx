@@ -2,7 +2,7 @@ import { Row } from ".";
 
 function MainPageRows() {
   return (
-    <div>
+    <div className="absolute top-[50vw]">
       <Row type="all" genre="trending" />
     </div>
   );

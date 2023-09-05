@@ -41,6 +41,9 @@ body {
 .grey-normal:hover {
   @apply bg-secondary-grey/50;
 }
+/* .netflix-first-row {
+  @apply absolute -top-4 left-0;
+} */
 @keyframes profileAnimation {
   0% {
     transform: scale(1.1);
