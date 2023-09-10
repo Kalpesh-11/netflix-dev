@@ -20,16 +20,16 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
   };
   return (
     <div
-      className="netflix-card relative inline-block"
+      className="netflix-card relative inline-block w-[19vw]"
       onMouseEnter={() => expandCard()}
       onMouseLeave={() => collapseCard()}
     >
       <Card
         style={{
           minWidth: 200,
-          maxWidth: "10vw",
+          maxWidth: "18vw",
           maxHeight: 100,
-          marginLeft: "10px",
+          marginLeft: "4px",
         }}
       >
         <CardMedia
@@ -48,12 +48,12 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
           <Card
             style={{
               position: "absolute",
-              maxWidth: "10vw",
+              maxWidth: "18vw",
               top: "50%",
               left: "50%",
               minWidth: 340,
               maxHeight: 300,
-              marginLeft: "10px",
+              marginLeft: "4px",
               transform: "translate(-50%, -50%)",
               zIndex: 999,
             }}

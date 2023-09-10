@@ -69,32 +69,31 @@ function Row({ type, genre }: RowProps) {
         <>
           <BsFillArrowRightCircleFill onClick={() => scrollNext()} />
           <BsFillArrowRightCircleFill onClick={() => scrollPrev()} />
-          <div className=" whitespace-nowrap w-screen px-8 mb-20 relative overflow-visible">
-            <div
+          <div
+            className=" whitespace-nowrap w-screen px-8 mb-20 relative overflow-visible"
+            style={{
+              transform: `translateX(-${(visualRange.start - 1) * 19}vw)`, // Adjust the translation based on your card width
+              transition: "transform 0.3s ease-in-out",
+            }}
+          >
+            {/* <div
               className="inline-block"
-              style={
-                {
-                  // transform: `translateX(-${column * 200}px)`, // Adjust the translation based on your card width
-                  // transition: "transform 0.3s ease-in-out",
-                }
-              }
-            >
-              {showPrev &&
-                movies
-                  ?.slice(prevVisualRange.start, prevVisualRange.end)
-                  .map((movie) => <MovieCard movie={movie} />)}
-              {movies
-                ?.slice(visualRange.start, visualRange.end)
-                .map((movie) => (
-                  <MovieCard movie={movie} />
-                ))}
-              {movies
-                ?.slice(nextVisualRange.start, nextVisualRange.end)
-                .map((movie) => (
-                  <MovieCard movie={movie} />
-                ))}
-            </div>
+              
+            > */}
+            {showPrev &&
+              movies
+                ?.slice(prevVisualRange.start, prevVisualRange.end)
+                .map((movie) => <MovieCard movie={movie} />)}
+            {movies?.slice(visualRange.start, visualRange.end).map((movie) => (
+              <MovieCard movie={movie} />
+            ))}
+            {movies
+              ?.slice(nextVisualRange.start, nextVisualRange.end)
+              .map((movie) => (
+                <MovieCard movie={movie} />
+              ))}
           </div>
+          {/* </div> */}
         </>
       )}
     </>
