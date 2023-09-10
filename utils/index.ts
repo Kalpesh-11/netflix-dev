@@ -59,3 +59,16 @@ export const getData = async (
     };
   }
 };
+export const calculateColumn = (width: number) => {
+  if (width >= 1400) {
+    return 5;
+  } else if (width >= 1100) {
+    return 4;
+  } else if (width >= 800) {
+    return 3;
+  } else if (width >= 500) {
+    return 2;
+  } else {
+    return 2;
+  }
+};

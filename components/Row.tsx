@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { RowProps } from "@/types";
-import { getData } from "@/utils";
+import React, { useEffect, useState } from "react";
+import { MovieCardProps, RowProps } from "@/types";
+import { calculateColumn, getData } from "@/utils";
 import { MovieCard } from ".";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 function Row({ type, genre }: RowProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [movies, setMovies] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,24 +19,85 @@ function Row({ type, genre }: RowProps) {
 
     fetchData();
   }, [type, genre]);
-  console.log(movies);
+  const [isLoading, setIsLoading] = useState(true);
+  const [column, setColumn] = useState(5);
+  const [movies, setMovies] = useState<MovieCardProps[]>([]);
+  const [visualRange, setVisualRange] = useState({ start: 0, end: 5 });
+  const [prevVisualRange, setPrevVisualRange] = useState({ start: 0, end: 0 });
+  const [nextVisualRange, setNextVisualRange] = useState({ start: 5, end: 10 });
+  const [showPrev, setShowPrev] = useState(false);
+  const scrollNext = () => {
+    const newStart = visualRange.end < 20 ? visualRange.end : 0;
+    const newEnd = Math.min(newStart + column, movies.length);
+    setShowPrev(true);
+    setVisualRange({ start: newStart, end: newEnd });
+    const newPrevStart = prevVisualRange.end < 20 ? prevVisualRange.end : 0;
+    const newPrevEnd = Math.min(newPrevStart + column, movies.length);
+    setPrevVisualRange({ start: newPrevStart, end: newPrevEnd });
+    const newNextStart = nextVisualRange.end < 20 ? nextVisualRange.end : 0;
+    const newNextEnd = Math.min(newNextStart + column, movies.length);
+    setNextVisualRange({ start: newNextStart, end: newNextEnd });
+  };
+  const scrollPrev = () => {
+    const newNextStart = visualRange.start;
+    const newNextEnd = visualRange.end;
+    setNextVisualRange({ start: newNextStart, end: newNextEnd });
+    const newStart = prevVisualRange.start;
+    const newEnd = prevVisualRange.end;
+    setVisualRange({ start: newStart, end: newEnd });
+    const newPrevStart =
+      prevVisualRange.start > 1
+        ? prevVisualRange.start - column
+        : movies.length - column;
+    const newPrevEnd = newPrevStart + column;
+    setPrevVisualRange({ start: newPrevStart, end: newPrevEnd });
+  };
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      const column = calculateColumn(window.innerWidth);
+      // setColumn(column);
+      console.log(window.innerWidth);
+      console.log(column);
+    });
+  }, []);
   return (
-    <div>
+    <>
       {isLoading ? (
         "loading"
       ) : (
-        <div>
-          {movies && (
-            <div className="flex flex-wrap">
-              {movies.map((movie) => {
-                return <MovieCard movie={movie} />;
-              })}
+        <>
+          <BsFillArrowRightCircleFill onClick={() => scrollNext()} />
+          <BsFillArrowRightCircleFill onClick={() => scrollPrev()} />
+          <div className=" whitespace-nowrap w-screen px-8 mb-20 relative overflow-visible">
+            <div
+              className="inline-block"
+              style={
+                {
+                  // transform: `translateX(-${column * 200}px)`, // Adjust the translation based on your card width
+                  // transition: "transform 0.3s ease-in-out",
+                }
+              }
+            >
+              {showPrev &&
+                movies
+                  ?.slice(prevVisualRange.start, prevVisualRange.end)
+                  .map((movie) => <MovieCard movie={movie} />)}
+              {movies
+                ?.slice(visualRange.start, visualRange.end)
+                .map((movie) => (
+                  <MovieCard movie={movie} />
+                ))}
+              {movies
+                ?.slice(nextVisualRange.start, nextVisualRange.end)
+                .map((movie) => (
+                  <MovieCard movie={movie} />
+                ))}
             </div>
-          )}
-        </div>
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 

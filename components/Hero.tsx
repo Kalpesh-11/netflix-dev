@@ -11,11 +11,11 @@ async function Hero() {
 
   return (
     <div style={backgroundImage} className="hero__container relative">
-      <div className="hero__info--wrap w-[50%] p-9 flex flex-col justify-end absolute left-[4%] bottom-[10%] md:bottom-[20%] md:w-[40%] lg:bottom-[36%]">
+      <div className="hero__info--wrap w-[50%] px-2 py-9 flex flex-col justify-end absolute left-[4%] bottom-[10%] md:bottom-[20%] md:w-[40%] lg:bottom-[36%]">
         <h1 className="herp__info--title text-2xl mb-4 font-extrabold md:text-7xl">
           {movie.original_title}
         </h1>
-        <p className="hero__info--desc text-xs font-semibold md:text-base">
+        <p className="hero__info--desc text-xs hidden font-semibold md:text-base md:block">
           {movie.overview}
         </p>
         <div className="hero__actions-wrap flex gap-4">
