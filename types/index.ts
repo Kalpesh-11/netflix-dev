@@ -41,4 +41,5 @@ export interface MovieCardProps {
   vote_average: number;
   vote_count: number;
   origin_country: string[];
+  isAnimating: boolean;
 }

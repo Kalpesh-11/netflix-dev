@@ -7,7 +7,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Grow } from "@mui/material";
 
-function MovieCard({ movie }: { movie: MovieCardProps }) {
+function MovieCard({
+  movie,
+  isAnimating,
+}: {
+  movie: MovieCardProps;
+  isAnimating: boolean;
+}) {
   const [isLiked, setIsLiked] = useState(false);
   const [isEventOpen, setIsEventOpen] = useState(false);
   const [isExpandCard, setIsExpandCard] = useState(false);
@@ -20,7 +26,7 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
   };
   return (
     <div
-      className="netflix-card relative inline-block w-[19vw]"
+      className="netflix-card relative inline-block w-[18vw]"
       onMouseEnter={() => expandCard()}
       onMouseLeave={() => collapseCard()}
     >
@@ -28,8 +34,10 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
         style={{
           minWidth: 200,
           maxWidth: "18vw",
-          maxHeight: 100,
-          marginLeft: "4px",
+          padding: " 0 0.2vw",
+          borderRadius: 10,
+          background: "transparent",
+          // maxHeight: 100,
         }}
       >
         <CardMedia
@@ -39,6 +47,7 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
           image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
         />
       </Card>
+
       {isExpandCard && (
         <Grow
           in={isExpandCard}
@@ -48,12 +57,11 @@ function MovieCard({ movie }: { movie: MovieCardProps }) {
           <Card
             style={{
               position: "absolute",
-              maxWidth: "18vw",
+              maxWidth: "20vw",
               top: "50%",
               left: "50%",
               minWidth: 340,
               maxHeight: 300,
-              marginLeft: "4px",
               transform: "translate(-50%, -50%)",
               zIndex: 999,
             }}

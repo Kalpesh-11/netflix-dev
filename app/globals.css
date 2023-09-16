@@ -26,6 +26,9 @@ body {
   @apply bg-cover w-full bg-center text-tertiary-white;
   height: 56.75vw;
 }
+.animating {
+  transition: transform 0.8s ease-in-out;
+}
 .netflix-btn-normal {
   @apply py-1 px-2 rounded-md font-normal flex text-xs justify-center items-center md:py-2 md:px-6 md:text-base md:font-bold;
 }
@@ -40,6 +43,12 @@ body {
 }
 .grey-normal:hover {
   @apply bg-secondary-grey/50;
+}
+.netflix-action_btn {
+  @apply absolute top-[50%] z-10 -translate-y-1/2 text-[50px] text-white;
+}
+.netflix__next {
+  @apply -end-3;
 }
 /* .netflix-first-row {
   @apply absolute -top-4 left-0;
