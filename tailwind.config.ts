@@ -14,9 +14,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "primary-black": "#141414",
+        "primary-black": { DEFAULT: "#141414", popup: "#181818" },
         "secondary-grey": { DEFAULT: "#808080", 100: "#6D6D6E" },
-        "tertiary-white": "#fff",
+        "tertiary-white": { DEFAULT: "#fff", heading: "#e5e5e5" },
+        "netflix-green": "#46d369",
       },
     },
   },

@@ -12,9 +12,10 @@ export interface ProfileListProps {
   isEdit: boolean;
 }
 export interface ButtonProps {
-  title: string;
+  title?: string;
   icon: React.ReactNode;
   btnFormat: string;
+  btnClass: string;
 }
 export interface RowProps {
   type: string;
@@ -41,5 +42,38 @@ export interface MovieCardProps {
   vote_average: number;
   vote_count: number;
   origin_country: string[];
-  isAnimating: boolean;
+}
+export interface MovieDetailsProps {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: string[];
+  budget: number;
+  genres: { name: string }[];
+  genre_ids?: string[];
+  media_type: string;
+  homepage: string;
+  id: number;
+  in_production: true;
+  languages: string;
+  last_air_date: number;
+  last_episode_to_air: string[];
+  name: string;
+  next_episode_to_air: null;
+  networks: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: string[];
+  production_countries: string[];
+  spoken_languages: string[];
+  status: string[];
+  tagline: string[];
+  type: string[];
+  vote_average: number;
+  vote_count: number;
+  runtime?: number;
+  number_of_episodes?: number;
+  number_of_seasons?: number;
 }

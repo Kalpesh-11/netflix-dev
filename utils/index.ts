@@ -28,13 +28,18 @@ export const apiRequest = (
 
   switch (true) {
     case type === "movie" && genre === "trending":
-      endpoint = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
+      endpoint =
+        process.env.NEXT_PUBLIC_API_ENDPOINT +
+        "trending/movie/day?language=en-US";
       break;
     case type === "tv" && genre === "trending":
-      endpoint = "a";
+      endpoint =
+        process.env.NEXT_PUBLIC_API_ENDPOINT + "trending/tv/day?language=en-US";
       break;
     case type === "all" && genre === "trending":
-      endpoint = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
+      endpoint =
+        process.env.NEXT_PUBLIC_API_ENDPOINT +
+        "trending/all/day?language=en-US";
       break;
     default:
       endpoint = "a";
@@ -59,15 +64,33 @@ export const getData = async (
     };
   }
 };
+export const getMovie = async (type: string, id: number) => {
+  try {
+    console.log("test");
+
+    const endpoint =
+      "movie" == type
+        ? process.env.NEXT_PUBLIC_API_ENDPOINT + `movie/${id}?language=en-US`
+        : process.env.NEXT_PUBLIC_API_ENDPOINT + `tv/${id}?language=en-US`;
+    const response = await axios.get(endpoint);
+    const movie = response.data;
+    return movie;
+  } catch (error: any) {
+    return {
+      statusCode: error.response?.status || 500,
+      data: error.response?.status_message || "An error occurred",
+    };
+  }
+};
 export const calculateColumn = (width: number) => {
   if (width >= 1400) {
-    return 5;
+    return 6;
   } else if (width >= 1100) {
-    return 4;
+    return 5;
   } else if (width >= 800) {
-    return 3;
+    return 4;
   } else if (width >= 500) {
-    return 2;
+    return 3;
   } else {
     return 2;
   }

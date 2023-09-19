@@ -1,22 +1,27 @@
-import { MovieCardProps, MovieProps } from "@/types";
-import Image from "next/image";
-import { useState } from "react";
+import { MovieCardProps, MovieDetailsProps } from "@/types";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Grow } from "@mui/material";
+import { BsFillPlayFill } from "react-icons/bs";
+import { SmallButton } from ".";
+import { getMovie } from "@/utils";
+
+const movieDetailsCache: Record<number, MovieDetailsProps> = {};
 
 function MovieCard({
   movie,
-  isAnimating,
+  column,
+  isAccessible,
 }: {
   movie: MovieCardProps;
-  isAnimating: boolean;
+  column: number;
+  isAccessible: boolean;
 }) {
   const [isLiked, setIsLiked] = useState(false);
-  const [isEventOpen, setIsEventOpen] = useState(false);
   const [isExpandCard, setIsExpandCard] = useState(false);
+  const match = Math.floor(movie.vote_average * 10);
   const expandCard = () => {
     setIsExpandCard(true);
   };
@@ -24,69 +29,121 @@ function MovieCard({
   const collapseCard = () => {
     setIsExpandCard(false);
   };
+  const columnWidth = (100 / column).toFixed(2);
+  const [movieDetails, setMovieDetails] = useState<MovieDetailsProps>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (movie.id in movieDetailsCache) {
+        setMovieDetails(movieDetailsCache[movie.id]);
+        return;
+      }
+
+      try {
+        const fetchedData = await getMovie(movie.media_type, movie.id);
+        movieDetailsCache[movie.id] = fetchedData;
+        setMovieDetails(fetchedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [movie]);
+  let minutes = 30;
+  let hours = 1;
+  let episodes_label = "";
+  if (movieDetails) {
+    if ("movie" == movie.media_type) {
+      const runtime = movieDetails.runtime ? movieDetails.runtime : 90;
+      minutes = runtime % 60;
+      hours = Math.floor(runtime / 60);
+    } else {
+      const isMultipleSeasons =
+        movieDetails.number_of_seasons && movieDetails.number_of_seasons > 1
+          ? true
+          : false;
+      episodes_label = isMultipleSeasons
+        ? movieDetails.number_of_seasons + " Seasons"
+        : movieDetails.number_of_episodes + " Episodes" ?? 8 + " Episodes";
+    }
+  }
+
   return (
     <div
-      className="netflix-card relative inline-block w-[18vw]"
+      className={`netflix-card relative inline-block`}
+      style={{
+        width: `${columnWidth}%`,
+        pointerEvents: isAccessible ? "unset" : "none",
+      }}
       onMouseEnter={() => expandCard()}
       onMouseLeave={() => collapseCard()}
     >
-      <Card
+      <div className="netflix-card__image-wrap">
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="50"
+            image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
+          />
+        </Card>
+      </div>
+      <div
+        className="netflix-card__expanded absolute top-[50%] left-[50%] z-[99] bg-transparent p-4 inline-block"
         style={{
-          minWidth: 200,
-          maxWidth: "18vw",
-          padding: " 0 0.2vw",
-          borderRadius: 10,
-          background: "transparent",
-          // maxHeight: 100,
+          transform: isExpandCard
+            ? "translate(-50%, -50%) scale(1)"
+            : "translate(-50%, -50%) scale(0)",
+          maxWidth: `${columnWidth}vw`,
+          opacity: isExpandCard ? 1 : 0,
+          minWidth: parseInt(columnWidth) < 35 ? 364 : 200,
+          zIndex: 999,
+          willChange: "transform",
+          transition: "all 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s",
         }}
       >
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="50"
-          image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
-        />
-      </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="50"
+            image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
+          />
 
-      {isExpandCard && (
-        <Grow
-          in={isExpandCard}
-          style={{ transformOrigin: "0 0 0" }}
-          {...(isExpandCard ? { timeout: 700 } : {})}
-        >
-          <Card
-            style={{
-              position: "absolute",
-              maxWidth: "20vw",
-              top: "50%",
-              left: "50%",
-              minWidth: 340,
-              maxHeight: 300,
-              transform: "translate(-50%, -50%)",
-              zIndex: 999,
-            }}
-          >
-            <CardMedia
-              component="img"
-              alt="green iguana"
-              height="50"
-              image={
-                process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path
-              }
+          <CardContent className="bg-primary-black-popup relative">
+            <SmallButton
+              icon={<BsFillPlayFill />}
+              btnFormat="bg-white"
+              btnClass="netflix-btn-small white-btn"
             />
 
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard11
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grow>
-      )}
+            <div className="flex justify-start gap-2 items-center text-[2vw] font-semibold mt-4 md:text-base md:gap-4 ">
+              <span className="text-netflix-green  ">{match}% Match</span>
+              <span className="text-secondary-grey border px-2">
+                U/A {movie.adult ? 18 : 16} +
+              </span>
+              <span className="text-secondary-grey">
+                {"movie" === movie.media_type
+                  ? `${hours}h ${minutes}m`
+                  : episodes_label}
+              </span>
+            </div>
+            <div className="text-tertiary-white flex gap-1 mt-4 text-[2vw] md:text-base md:gap-2">
+              {movieDetails?.genres.slice(0, 3).map((genre, index) => (
+                <>
+                  {index > 0 && index < 3 && (
+                    <span
+                      key={`separator-${index}`}
+                      className="netflix-separator"
+                    ></span>
+                  )}
+                  <span key={`genre-${index}`}>{genre.name}</span>
+                </>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -18,6 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  @apply select-none;
 }
 .profiles-container {
   animation: profileAnimation 0.45s forwards;
@@ -27,10 +28,10 @@ body {
   height: 56.75vw;
 }
 .animating {
-  transition: transform 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
 }
 .netflix-btn-normal {
-  @apply py-1 px-2 rounded-md font-normal flex text-xs justify-center items-center md:py-2 md:px-6 md:text-base md:font-bold;
+  @apply py-1 px-2 rounded-md mt-4 font-normal flex text-xs justify-center items-center md:py-2 md:px-6 md:text-base md:font-bold;
 }
 .white-normal {
   @apply text-black bg-white;
@@ -44,11 +45,40 @@ body {
 .grey-normal:hover {
   @apply bg-secondary-grey/50;
 }
+.white-small {
+  @apply text-black bg-white p-0;
+}
 .netflix-action_btn {
-  @apply absolute top-[50%] z-10 -translate-y-1/2 text-[50px] text-white;
+  @apply absolute w-[4%] top-[49%] z-10 -translate-y-1/2 text-base text-white h-[95%] group-hover:bg-secondary-grey-100 group-hover:bg-opacity-50 md:text-3xl;
+}
+.netflix-btn-small.white-btn {
+  @apply hover:bg-white/80;
 }
 .netflix__next {
-  @apply -end-3;
+  right: calc(-4% - 0.3vw);
+}
+.netflix__previous {
+  left: calc(-4% - 0.3vw);
+}
+.netflix-separator::before {
+  color: #646464;
+  content: "\2022";
+  display: inline-block;
+  padding-right: 0.5vw;
+}
+.netflix_rows {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    #141414de 30%,
+    #141414
+  );
+}
+.netflix-card__image-wrap {
+  min-width: 18%;
+  padding: 0 0.2vw;
+  border-radius: 10px;
+  background-color: transparent;
 }
 /* .netflix-first-row {
   @apply absolute -top-4 left-0;
