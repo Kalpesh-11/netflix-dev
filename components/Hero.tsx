@@ -2,8 +2,9 @@ import { getHeroMovie } from "@/utils";
 import { Button } from "@/components";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-async function Hero() {
-  const movie = (await getHeroMovie()).data;
+import { HeroProps } from "@/types";
+async function Hero({ type, genre }: HeroProps) {
+  const movie = (await getHeroMovie(type, genre)).data;
 
   const backgroundImage = {
     backgroundImage: `linear-gradient(to right,rgba(0,0,0,.3),rgba(0,0,0,.0)), url(${process.env.NEXT_PUBLIC_IMAGE_ENDPOINT}${movie.backdrop_path})`,

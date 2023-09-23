@@ -22,6 +22,10 @@ export interface RowProps {
   genre: string;
   heading: string;
 }
+export interface HeroProps {
+  type: string;
+  genre: string;
+}
 export interface MovieProps {
   type: string;
   genre: string;

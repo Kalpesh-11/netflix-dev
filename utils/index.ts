@@ -1,8 +1,11 @@
 import { ProfileProps, RowProps } from "@/types";
 import axios from "./axios";
-export const getHeroMovie = async () => {
+export const getHeroMovie = async (type: string, genre: string = "") => {
   try {
-    const response = await axios.get("/movie/popular?language=en-US&page=1");
+    const endpoint = apiRequest(type, genre);
+    console.log(endpoint);
+
+    const response = await axios.get(endpoint);
     const movie = response.data.results[0];
     return { statusCode: response.status, data: movie };
   } catch (error: any) {
@@ -24,27 +27,18 @@ export const apiRequest = (
   type: RowProps["type"],
   genre: RowProps["genre"]
 ) => {
-  let endpoint;
-
-  switch (true) {
-    case type === "movie" && genre === "trending":
-      endpoint =
-        process.env.NEXT_PUBLIC_API_ENDPOINT +
-        "trending/movie/day?language=en-US";
-      break;
-    case type === "tv" && genre === "trending":
-      endpoint =
-        process.env.NEXT_PUBLIC_API_ENDPOINT + "trending/tv/day?language=en-US";
-      break;
-    case type === "all" && genre === "trending":
-      endpoint =
-        process.env.NEXT_PUBLIC_API_ENDPOINT +
-        "trending/all/day?language=en-US";
-      break;
-    default:
-      endpoint = "a";
+  const baseEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
+  let endpoint = `trending/${type}/day?language=en-US`;
+  if ("trending" === genre) {
+    endpoint = `trending/${type}/day?language=en-US`;
+  } else if ("popular" === genre) {
+    endpoint = `${type}/popular?language=en-US&page=1`;
+  } else if (genre) {
+    endpoint = `discover/${type}?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
+  } else {
+    endpoint = `discover/${type}?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
   }
-  return endpoint;
+  return baseEndpoint + endpoint;
 };
 export const getData = async (
   type: RowProps["type"],
