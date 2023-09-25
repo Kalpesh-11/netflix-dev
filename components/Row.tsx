@@ -9,8 +9,6 @@ function Row({ type, genre, heading }: RowProps) {
   useEffect(() => {
     const columns = calculateColumn(window.innerWidth);
     setColumn(columns);
-    console.log(window.innerWidth);
-
     window.addEventListener("resize", () => {
       const columns = calculateColumn(window.innerWidth);
       setColumn(columns);
@@ -88,68 +86,74 @@ function Row({ type, genre, heading }: RowProps) {
   };
   return (
     <>
-      {isLoading ? (
-        "loading"
-      ) : (
-        <div className=" group px-[4%] ">
-          <div>
-            <h3 className="text-tertiary-white-heading font-semibold text-lg mb-2">
-              {heading}
-            </h3>
-          </div>
-          <div className="relative">
-            {showPrev && (
-              <IoIosArrowBack
-                onClick={() => scrollPrev()}
-                className="netflix__previous netflix-action_btn hidden group-hover:block"
-              />
-            )}
-            <div
-              className={`whitespace-nowrap relative w-full overflow-visible ${
-                isAnimating && "animating"
-              }`}
-              style={{
-                // transform: `translate(${scrollValue}%, 0px)`,
-                marginLeft: `${scrollValue}%`,
-              }}
-            >
-              {showPrev &&
-                movies
-                  ?.slice(prevVisualRange.start, prevVisualRange.end)
-                  .map((movie) => (
-                    <MovieCard
-                      movie={movie}
-                      column={column}
-                      isAccessible={false}
-                    />
-                  ))}
-              {movies
-                ?.slice(visualRange.start, visualRange.end)
-                .map((movie) => (
-                  <MovieCard
-                    movie={movie}
-                    column={column}
-                    isAccessible={true}
+      {isLoading
+        ? "loading"
+        : movies.length !== 0 && (
+            <div className=" group px-[4%] ">
+              <div>
+                <h3 className="text-tertiary-white-heading font-semibold text-lg mb-2">
+                  {heading}
+                </h3>
+              </div>
+              <div className="relative">
+                {showPrev && (
+                  <IoIosArrowBack
+                    onClick={() => scrollPrev()}
+                    className="netflix__previous netflix-action_btn hidden group-hover:block"
                   />
-                ))}
-              {movies
-                ?.slice(nextVisualRange.start, nextVisualRange.end)
-                .map((movie) => (
-                  <MovieCard
-                    movie={movie}
-                    column={column}
-                    isAccessible={false}
-                  />
-                ))}
+                )}
+                <div
+                  className={`whitespace-nowrap relative w-full overflow-visible ${
+                    isAnimating && "animating"
+                  }`}
+                  style={{
+                    // transform: `translate(${scrollValue}%, 0px)`,
+                    marginLeft: `${scrollValue}%`,
+                  }}
+                >
+                  {showPrev &&
+                    movies
+                      ?.slice(prevVisualRange.start, prevVisualRange.end)
+                      .map((movie, index) => (
+                        <MovieCard
+                          key={index}
+                          movie={movie}
+                          column={column}
+                          isAccessible={false}
+                          mediaType={type}
+                        />
+                      ))}
+                  {movies
+                    ?.slice(visualRange.start, visualRange.end)
+                    .map((movie, index) => (
+                      <MovieCard
+                        key={index}
+                        movie={movie}
+                        column={column}
+                        isAccessible={true}
+                        mediaType={type}
+                      />
+                    ))}
+                  {movies
+                    ?.slice(nextVisualRange.start, nextVisualRange.end)
+                    .map((movie, index) => (
+                      <MovieCard
+                        key={index}
+                        movie={movie}
+                        column={column}
+                        isAccessible={false}
+                        mediaType={type}
+                      />
+                    ))}
+                </div>
+                <IoIosArrowForward
+                  className="netflix__next netflix-action_btn hidden group-hover:block"
+                  value={{ color: "blue", size: "50px" }}
+                  onClick={() => scrollNext()}
+                />
+              </div>
             </div>
-            <IoIosArrowForward
-              className="netflix__next netflix-action_btn hidden group-hover:block"
-              value={{ color: "blue", size: "50px" }}
-              onClick={() => scrollNext()}
-            />
-          </div>
-        </div>
-      )}
+          )}
     </>
   );
 }

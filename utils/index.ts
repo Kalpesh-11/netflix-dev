@@ -1,10 +1,11 @@
 import { ProfileProps, RowProps } from "@/types";
 import axios from "./axios";
-export const getHeroMovie = async (type: string, genre: string = "") => {
+export const getHeroMovie = async (
+  type: "movie" | "tv" | "all",
+  genre: string = ""
+) => {
   try {
     const endpoint = apiRequest(type, genre);
-    console.log(endpoint);
-
     const response = await axios.get(endpoint);
     const movie = response.data.results[0];
     return { statusCode: response.status, data: movie };
@@ -48,7 +49,7 @@ export const getData = async (
     const endpoint = apiRequest(type, genre);
     const response = await axios.get(endpoint);
     const movie = response.data.results;
-    // console.log(movie);
+    console.log(movie);
 
     return movie;
   } catch (error: any) {
@@ -58,10 +59,8 @@ export const getData = async (
     };
   }
 };
-export const getMovie = async (type: string, id: number) => {
+export const getMovie = async (type: "movie" | "tv" | "all", id: number) => {
   try {
-    console.log("test");
-
     const endpoint =
       "movie" == type
         ? process.env.NEXT_PUBLIC_API_ENDPOINT + `movie/${id}?language=en-US`

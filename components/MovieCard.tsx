@@ -14,10 +14,12 @@ function MovieCard({
   movie,
   column,
   isAccessible,
+  mediaType,
 }: {
   movie: MovieCardProps;
   column: number;
   isAccessible: boolean;
+  mediaType: "movie" | "tv" | "all";
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isExpandCard, setIsExpandCard] = useState(false);
@@ -31,6 +33,8 @@ function MovieCard({
   };
   const columnWidth = (100 / column).toFixed(2);
   const [movieDetails, setMovieDetails] = useState<MovieDetailsProps>();
+  const movieType =
+    undefined !== movie.media_type ? movie.media_type : mediaType;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +44,7 @@ function MovieCard({
       }
 
       try {
-        const fetchedData = await getMovie(movie.media_type, movie.id);
+        const fetchedData = await getMovie(movieType, movie.id);
         movieDetailsCache[movie.id] = fetchedData;
         setMovieDetails(fetchedData);
       } catch (error) {
@@ -53,7 +57,7 @@ function MovieCard({
   let hours = 1;
   let episodes_label = "";
   if (movieDetails) {
-    if ("movie" == movie.media_type) {
+    if ("movie" == movieType) {
       const runtime = movieDetails.runtime ? movieDetails.runtime : 90;
       minutes = runtime % 60;
       hours = Math.floor(runtime / 60);
@@ -123,7 +127,7 @@ function MovieCard({
                 U/A {movie.adult ? 18 : 16} +
               </span>
               <span className="text-secondary-grey">
-                {"movie" === movie.media_type
+                {"movie" === movieType
                   ? `${hours}h ${minutes}m`
                   : episodes_label}
               </span>

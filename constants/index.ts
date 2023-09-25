@@ -4,18 +4,46 @@ export const profiles = [
     name: "Tony",
     imgSrc: "https://placehold.co/150",
     isSelected: false,
+    // movie:['878','12','35','53','53']
+    movie: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
+    },
+    tv: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
+    },
   },
   {
-    id: "steve",
-    name: "Steve",
+    id: "joey",
+    name: "Joey",
     imgSrc: "https://placehold.co/150",
     isSelected: false,
+    movie: {
+      Comedy: "35",
+      Romance: "10749",
+      Family: "10751",
+      Animation: "16",
+    },
   },
   {
-    id: "bruce",
-    name: "Bruce",
+    id: "ww",
+    name: "Walter White",
     imgSrc: "https://placehold.co/150",
     isSelected: false,
+    movie: {
+      Crime: "80",
+      "Science Fiction": "878",
+      History: "36",
+      Mystery: "9648",
+      Documentary: "99",
+    },
   },
   {
     id: "natasha",
@@ -28,6 +56,13 @@ export const profiles = [
     name: "Thor",
     imgSrc: "https://placehold.co/150",
     isSelected: false,
+    movie: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
+    },
   },
 ];
 export interface Profile {

@@ -3,6 +3,8 @@ export interface ProfileProps {
   name: string;
   imgSrc: string;
   isSelected: boolean;
+  movie: string[];
+  tv: string[];
 }
 export interface ProfilesProps {
   profiles: ProfileProps[];
@@ -18,12 +20,12 @@ export interface ButtonProps {
   btnClass: string;
 }
 export interface RowProps {
-  type: string;
+  type: "movie" | "tv" | "all";
   genre: string;
   heading: string;
 }
 export interface HeroProps {
-  type: string;
+  type: "movie" | "tv" | "all";
   genre: string;
 }
 export interface MovieProps {

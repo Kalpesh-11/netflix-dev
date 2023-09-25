@@ -12,7 +12,7 @@ export default function Loading() {
   );
   const profile = getProfile(selectedProfileId, profiles);
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-screen h-screen flex justify-center items-center bg-white">
       {selectedProfileId}
     </div>
   );

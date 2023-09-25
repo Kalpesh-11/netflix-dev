@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  @apply select-none;
+  /* @apply select-none; */
 }
 .profiles-container {
   animation: profileAnimation 0.45s forwards;
@@ -73,6 +73,7 @@ body {
     #141414de 30%,
     #141414
   );
+  @apply absolute top-[30vw] md:top-[35vw] overflow-x-hidden w-full pt-28 [&>*:not(:first-child)]:mt-9;
 }
 .netflix-card__image-wrap {
   min-width: 18%;
