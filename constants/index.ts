@@ -2,9 +2,8 @@ export const profiles = [
   {
     id: "tony",
     name: "Tony",
-    imgSrc: "https://placehold.co/150",
+    imgSrc: "/tony.png",
     isSelected: false,
-    // movie:['878','12','35','53','53']
     movie: {
       "Science Fiction": "878",
       Adventure: "12",
@@ -23,7 +22,7 @@ export const profiles = [
   {
     id: "joey",
     name: "Joey",
-    imgSrc: "https://placehold.co/150",
+    imgSrc: "/joey.png",
     isSelected: false,
     movie: {
       Comedy: "35",

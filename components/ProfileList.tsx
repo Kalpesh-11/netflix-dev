@@ -28,7 +28,7 @@ function ProfileList({ isEdit }: ProfileListProps) {
               className="w-[10vw] min-w-[130px] min-h-[84px]"
             >
               <div className="profile__list-wrap mb-6 group w-full ">
-                <div className="profile__list--image group-hover:ring-1 group-hover:ring-secondary-grey relative">
+                <div className="profile__list--image rounded-md group-hover:border-2 group-hover:rounded-md group-hover:ring-secondary-grey relative">
                   <Image
                     src={profile.imgSrc}
                     alt={profile.name}
@@ -50,7 +50,7 @@ function ProfileList({ isEdit }: ProfileListProps) {
           );
         })}
       </ul>
-      {true !== isEdit ? (
+      {/* {true !== isEdit ? (
         <a
           className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
           href="/ManageProfile"
@@ -64,7 +64,7 @@ function ProfileList({ isEdit }: ProfileListProps) {
         >
           Done
         </a>
-      )}
+      )} */}
     </div>
   );
 }

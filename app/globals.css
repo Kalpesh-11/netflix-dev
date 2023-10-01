@@ -25,7 +25,7 @@ body {
 }
 .hero__container {
   @apply bg-cover w-full bg-center text-tertiary-white;
-  height: 56.75vw;
+  height: 60vw;
 }
 .animating {
   transition: all 0.8s ease-in-out;
@@ -73,7 +73,7 @@ body {
     #141414de 30%,
     #141414
   );
-  @apply absolute top-[30vw] md:top-[35vw] overflow-x-hidden w-full pt-28 [&>*:not(:first-child)]:mt-9;
+  @apply relative overflow-x-hidden mt-[25vw] md:mt-[34vw] pb-[10vw] pt-28 w-full [&>*:not(:first-child)]:mt-9;
 }
 .netflix-card__image-wrap {
   min-width: 18%;

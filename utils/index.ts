@@ -2,7 +2,7 @@ import { ProfileProps, RowProps } from "@/types";
 import axios from "./axios";
 export const getHeroMovie = async (
   type: "movie" | "tv" | "all",
-  genre: string = ""
+  genre: string | null = ""
 ) => {
   try {
     const endpoint = apiRequest(type, genre);
@@ -87,24 +87,28 @@ export const calculateColumn = (width: number) => {
     return 2;
   }
 };
-export const isGenreExist = async (type: string, genre: string | number) => {
-  if (genre === "popular" || genre === "trending" || genre === "all ") {
-    return true;
-  }
-  const genreList = await getGenre(type);
-  let isExist = false;
-  for (const genreArray of genreList) {
-    if (
-      genreArray.id ===
-      (typeof genre === "number" ? genre : parseInt(genre, 10))
-    ) {
-      isExist = true;
-      break;
+export const isGenreExist = async (
+  type: string,
+  genre: string | number | null
+) => {
+  if (genre) {
+    if (genre === "popular" || genre === "trending" || genre === "all ") {
+      return [];
     }
+    const genreList = await getGenre(type);
+    let isExist = [];
+    for (const genreArray of genreList) {
+      if (
+        genreArray.id ===
+        (typeof genre === "number" ? genre : parseInt(genre, 10))
+      ) {
+        isExist = genreArray;
+        break;
+      }
+    }
+    return isExist;
   }
-  console.log(isExist);
-
-  return isExist;
+  return [];
 };
 export const getGenre = async (type: string) => {
   try {

@@ -8,6 +8,7 @@ import SmallButton from "./SmallButton";
 import SubHeader from "./SubHeader";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import Footer from "./Footer";
 export {
   ProfileList,
   Hero,
@@ -19,4 +20,5 @@ export {
   Sidebar,
   Header,
   SubHeader,
+  Footer,
 };

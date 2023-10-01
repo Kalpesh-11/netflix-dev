@@ -10,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import { useScrollTrigger } from "@mui/material";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
-import { Sidebar } from ".";
+import { Sidebar, SubHeader } from ".";
 import { menus, SettingMenus } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks";
@@ -19,6 +19,8 @@ import { getProfile } from "@/utils";
 
 function Header() {
   const router = usePathname();
+  const query = router.split("/");
+  const type = query[2];
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -169,6 +171,7 @@ function Header() {
             </Box>
           </Toolbar>
         </Container>
+        {["movie", "tv"].includes(type) && <SubHeader />}
       </AppBar>
       <Sidebar toggleDrawer={toggleDrawer} state={state} />
     </>

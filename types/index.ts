@@ -21,12 +21,12 @@ export interface ButtonProps {
 }
 export interface RowProps {
   type: "movie" | "tv" | "all";
-  genre: string;
+  genre: string | null;
   heading: string;
 }
 export interface HeroProps {
   type: "movie" | "tv" | "all";
-  genre: string;
+  genre: string | null;
 }
 export interface MovieProps {
   type: string;
@@ -88,4 +88,8 @@ export interface SideBarProps {
     open: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
   state: boolean;
+}
+export interface GenreProps {
+  id: string;
+  name: string;
 }

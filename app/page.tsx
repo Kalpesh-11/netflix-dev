@@ -1,5 +1,5 @@
 "use client";
-import { Hero, ProfileList, Row } from "@/components";
+import { Footer, Hero, ProfileList, Row } from "@/components";
 import { useAppSelector } from "@/hooks";
 
 export default function Home() {
@@ -34,6 +34,7 @@ export default function Home() {
               heading={"Trending TV Shows"}
             />
           </div>
+          <Footer />
         </>
       )}
     </main>

@@ -1,16 +1,19 @@
 "use client";
-import { Hero, ProfileList, Row } from "@/components";
+import { Footer, Hero, ProfileList, Row } from "@/components";
 import { useAppSelector } from "@/hooks";
-import { ProfilesProps } from "@/types";
-import { getGenre, getProfile, isGenreExist } from "@/utils";
+import { GenreProps, ProfilesProps } from "@/types";
+import { getProfile, isGenreExist } from "@/utils";
 import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
+import { useSearchParams } from "next/navigation";
 export default function page({ params }: { params: { type: string[] } }) {
   const [isLoading, setLoading] = useState(true);
   const [userMovies, setUserMovies] = useState<[string, string][]>([]);
   const type = params ? params.type[0] : "movie";
-  const genre = params.type[1] ? params.type[1] : "popular";
+  // const genre = params.type[1] ? params.type[1] : "popular";
+  const searchParams = useSearchParams();
+  const genre = searchParams.get("bc");
   const subHeading = type == "movie" ? "Movies" : "Tv Shows";
   const selectedProfileID = useAppSelector(
     (state) => state.profiles.selectedProfileID
@@ -18,7 +21,7 @@ export default function page({ params }: { params: { type: string[] } }) {
   const { profiles }: ProfilesProps = useAppSelector(
     (state) => state.profiles.profileList
   );
-  const [isExist, setIsExist] = useState<boolean | null>(null);
+  const [isExist, setIsExist] = useState<GenreProps | null>(null);
   const profile = getProfile(selectedProfileID, profiles);
   useEffect(() => {
     setLoading(true);
@@ -34,55 +37,63 @@ export default function page({ params }: { params: { type: string[] } }) {
     }
 
     setLoading(false);
-  }, [profile]);
+  }, [profile, genre]);
   if ("movie" !== type && "tv" !== type) {
     notFound();
   }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
-      {null === selectedProfileID || null === profile ? (
-        <ProfileList isEdit={false} />
-      ) : isLoading ? (
-        <Loading />
-      ) : isExist ? (
-        <>
-          <Hero type={type} genre={genre} />
-          <div className="netflix_rows">
-            <Row type={type} genre="popular" heading={"Popular on Netflix"} />
-            {userMovies &&
-              userMovies
-                .slice(0, 2)
-                .map(([genre, genreID]) => (
-                  <Row
-                    type={type}
-                    key={genreID}
-                    genre={genreID}
-                    heading={`${genre} ${subHeading}`}
-                  />
-                ))}
-            <Row
-              type={type}
-              genre="trending"
-              heading={`Trending ${subHeading}`}
-            />
-            {userMovies &&
-              userMovies
-                .slice(2)
-                .map(([genre, genreID]) => (
-                  <Row
-                    type={type}
-                    key={genreID}
-                    genre={genreID}
-                    heading={`${genre} ${subHeading}`}
-                  />
-                ))}
-            {/*
-             */}
-          </div>
-        </>
-      ) : (
-        <p>Genre not found.</p>
-      )}
-    </main>
+    <>
+      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
+        {null === selectedProfileID || null === profile ? (
+          <ProfileList isEdit={false} />
+        ) : isLoading ? (
+          <Loading />
+        ) : isExist ? (
+          <>
+            <Hero type={type} genre={genre} />
+            <div className="netflix_rows">
+              {genre && (
+                <Row
+                  type={type}
+                  genre={genre}
+                  heading={`${isExist.name} ${subHeading}`}
+                />
+              )}
+              <Row type={type} genre="popular" heading={"Popular on Netflix"} />
+              {userMovies &&
+                userMovies
+                  .slice(0, 2)
+                  .map(([genre, genreID]) => (
+                    <Row
+                      type={type}
+                      key={genreID}
+                      genre={genreID}
+                      heading={`${genre} ${subHeading}`}
+                    />
+                  ))}
+              <Row
+                type={type}
+                genre="trending"
+                heading={`Trending ${subHeading}`}
+              />
+              {userMovies &&
+                userMovies
+                  .slice(2)
+                  .map(([genre, genreID]) => (
+                    <Row
+                      type={type}
+                      key={genreID}
+                      genre={genreID}
+                      heading={`${genre} ${subHeading}`}
+                    />
+                  ))}
+            </div>
+          </>
+        ) : (
+          <p>Genre not found.</p>
+        )}
+      </main>
+    </>
   );
 }

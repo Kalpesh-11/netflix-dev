@@ -5,7 +5,6 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
 } from "@mui/material";
 import { menus, SettingMenus } from "@/constants";
 import Link from "next/link";
