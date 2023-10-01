@@ -1,6 +1,4 @@
 import { ButtonProps } from "@/types";
-import React from "react";
-
 function SmallButton({ title, icon, btnFormat, btnClass }: ButtonProps) {
   return (
     <>

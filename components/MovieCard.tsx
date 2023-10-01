@@ -134,7 +134,7 @@ function MovieCard({
             </div>
             <div className="text-tertiary-white flex gap-1 mt-4 text-[2vw] md:text-base md:gap-2">
               {movieDetails?.genres.slice(0, 3).map((genre, index) => (
-                <>
+                <div key={index}>
                   {index > 0 && index < 3 && (
                     <span
                       key={`separator-${index}`}
@@ -142,7 +142,7 @@ function MovieCard({
                     ></span>
                   )}
                   <span key={`genre-${index}`}>{genre.name}</span>
-                </>
+                </div>
               ))}
             </div>
           </CardContent>

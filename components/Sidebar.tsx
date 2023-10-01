@@ -7,11 +7,20 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import React from "react";
+import { menus, SettingMenus } from "@/constants";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { SideBarProps } from "@/types";
 
-function Sidebar({ toggleDrawer, state }) {
+function Sidebar({ toggleDrawer, state }: SideBarProps) {
+  const router = usePathname();
   return (
-    <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+    <Drawer
+      anchor="left"
+      open={state}
+      onClose={toggleDrawer(false)}
+      sx={{ ".MuiDrawer-paper": { backgroundColor: "black", pt: 5 } }}
+    >
       <Box
         sx={{ width: 250 }}
         role="presentation"
@@ -19,20 +28,34 @@ function Sidebar({ toggleDrawer, state }) {
         onKeyDown={toggleDrawer(false)}
       >
         <List>
-          {["Profile", "Account", "SighnOut"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {Object.entries(SettingMenus).map(([title, link]) => (
+            <ListItem key={title} disablePadding>
               <ListItemButton>
-                <ListItemText primary={text} />
+                <Link
+                  href={link}
+                  className={`netflix-nav-link ${
+                    router == link ? "active" : ""
+                  }`}
+                >
+                  {title}
+                </Link>
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider sx={{ backgroundColor: "#333" }} />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {Object.entries(menus).map(([title, link]) => (
+            <ListItem key={title} disablePadding>
               <ListItemButton>
-                <ListItemText primary={text} />
+                <Link
+                  href={link}
+                  className={`netflix-nav-link ${
+                    router == link ? "active" : ""
+                  }`}
+                >
+                  {title}
+                </Link>
               </ListItemButton>
             </ListItem>
           ))}

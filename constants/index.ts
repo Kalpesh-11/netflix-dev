@@ -65,6 +65,16 @@ export const profiles = [
     },
   },
 ];
+export const menus = {
+  Home: "/",
+  "Tv Shows": "/genre/tv",
+  Movies: "/genre/movie",
+};
+export const SettingMenus = {
+  Account: "/",
+  "Help Center": "#",
+  "Sign out from Netflix": "#",
+};
 export interface Profile {
   id: String;
 }

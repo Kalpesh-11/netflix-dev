@@ -81,6 +81,14 @@ body {
   border-radius: 10px;
   background-color: transparent;
 }
+.netflix-nav-link {
+  @apply text-tertiary-white-heading my-2 block mx-2 hover:text-tertiary-white-hover text-sm;
+  transition: color 0.4s;
+}
+.netflix-nav-link.active {
+  @apply text-tertiary-white font-medium cursor-default text-sm;
+  transition: color 0.4s;
+}
 /* .netflix-first-row {
   @apply absolute -top-4 left-0;
 } */

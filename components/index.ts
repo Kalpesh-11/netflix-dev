@@ -5,9 +5,9 @@ import MainPageRows from "./MainPageRows";
 import Row from "./Row";
 import MovieCard from "./MovieCard";
 import SmallButton from "./SmallButton";
-import Header from "./Header";
+import SubHeader from "./SubHeader";
 import Sidebar from "./Sidebar";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import Header from "./Header";
 export {
   ProfileList,
   Hero,
@@ -16,7 +16,7 @@ export {
   Row,
   MovieCard,
   SmallButton,
-  Header,
   Sidebar,
-  ResponsiveAppBar,
+  Header,
+  SubHeader,
 };

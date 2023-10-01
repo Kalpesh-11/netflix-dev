@@ -83,3 +83,9 @@ export interface MovieDetailsProps {
   number_of_episodes?: number;
   number_of_seasons?: number;
 }
+export interface SideBarProps {
+  toggleDrawer: (
+    open: boolean
+  ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  state: boolean;
+}

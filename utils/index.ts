@@ -49,7 +49,6 @@ export const getData = async (
     const endpoint = apiRequest(type, genre);
     const response = await axios.get(endpoint);
     const movie = response.data.results;
-    console.log(movie);
 
     return movie;
   } catch (error: any) {
@@ -59,7 +58,7 @@ export const getData = async (
     };
   }
 };
-export const getMovie = async (type: "movie" | "tv" | "all", id: number) => {
+export const getMovie = async (type: string, id: number) => {
   try {
     const endpoint =
       "movie" == type
@@ -86,5 +85,37 @@ export const calculateColumn = (width: number) => {
     return 3;
   } else {
     return 2;
+  }
+};
+export const isGenreExist = async (type: string, genre: string | number) => {
+  if (genre === "popular" || genre === "trending" || genre === "all ") {
+    return true;
+  }
+  const genreList = await getGenre(type);
+  let isExist = false;
+  for (const genreArray of genreList) {
+    if (
+      genreArray.id ===
+      (typeof genre === "number" ? genre : parseInt(genre, 10))
+    ) {
+      isExist = true;
+      break;
+    }
+  }
+  console.log(isExist);
+
+  return isExist;
+};
+export const getGenre = async (type: string) => {
+  try {
+    const endpoint =
+      process.env.NEXT_PUBLIC_API_ENDPOINT + `genre/${type}/list?language=en`;
+    const response = await axios.get(endpoint);
+    return response.data.genres;
+  } catch (error: any) {
+    return {
+      statusCode: error.response?.status || 500,
+      data: error.response?.status_message || "An error occurred",
+    };
   }
 };

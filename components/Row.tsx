@@ -116,7 +116,7 @@ function Row({ type, genre, heading }: RowProps) {
                       ?.slice(prevVisualRange.start, prevVisualRange.end)
                       .map((movie, index) => (
                         <MovieCard
-                          key={index}
+                          key={`prev-${index}`}
                           movie={movie}
                           column={column}
                           isAccessible={false}
@@ -127,7 +127,7 @@ function Row({ type, genre, heading }: RowProps) {
                     ?.slice(visualRange.start, visualRange.end)
                     .map((movie, index) => (
                       <MovieCard
-                        key={index}
+                        key={`current-${index}`}
                         movie={movie}
                         column={column}
                         isAccessible={true}
@@ -138,7 +138,7 @@ function Row({ type, genre, heading }: RowProps) {
                     ?.slice(nextVisualRange.start, nextVisualRange.end)
                     .map((movie, index) => (
                       <MovieCard
-                        key={index}
+                        key={`next-${index}`}
                         movie={movie}
                         column={column}
                         isAccessible={false}

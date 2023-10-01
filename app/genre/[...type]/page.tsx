@@ -2,7 +2,7 @@
 import { Hero, ProfileList, Row } from "@/components";
 import { useAppSelector } from "@/hooks";
 import { ProfilesProps } from "@/types";
-import { getProfile } from "@/utils";
+import { getGenre, getProfile, isGenreExist } from "@/utils";
 import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
@@ -18,27 +18,33 @@ export default function page({ params }: { params: { type: string[] } }) {
   const { profiles }: ProfilesProps = useAppSelector(
     (state) => state.profiles.profileList
   );
+  const [isExist, setIsExist] = useState<boolean | null>(null);
   const profile = getProfile(selectedProfileID, profiles);
   useEffect(() => {
     setLoading(true);
+    const checkGenre = async () => {
+      const isExistCheck = await isGenreExist(type, genre);
+      setIsExist(isExistCheck);
+    };
+    checkGenre();
     const newUserMovies = type == "movie" ? profile?.movie : profile?.tv;
     if (undefined !== newUserMovies) {
       const movieArray = Object.entries(newUserMovies);
       setUserMovies(movieArray);
     }
+
     setLoading(false);
   }, [profile]);
   if ("movie" !== type && "tv" !== type) {
     notFound();
   }
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
       {null === selectedProfileID || null === profile ? (
         <ProfileList isEdit={false} />
       ) : isLoading ? (
         <Loading />
-      ) : (
+      ) : isExist ? (
         <>
           <Hero type={type} genre={genre} />
           <div className="netflix_rows">
@@ -74,6 +80,8 @@ export default function page({ params }: { params: { type: string[] } }) {
              */}
           </div>
         </>
+      ) : (
+        <p>Genre not found.</p>
       )}
     </main>
   );
