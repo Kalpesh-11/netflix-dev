@@ -7,11 +7,10 @@ import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import { useSearchParams } from "next/navigation";
-export default function page({ params }: { params: { type: string[] } }) {
+export default function typePage({ params }: { params: { type: string[] } }) {
   const [isLoading, setLoading] = useState(true);
   const [userMovies, setUserMovies] = useState<[string, string][]>([]);
   const type = params ? params.type[0] : "movie";
-  // const genre = params.type[1] ? params.type[1] : "popular";
   const searchParams = useSearchParams();
   const genre = searchParams.get("bc");
   const subHeading = type == "movie" ? "Movies" : "Tv Shows";

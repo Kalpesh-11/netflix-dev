@@ -1,4 +1,5 @@
-import * as React from "react";
+"use client";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,9 +22,7 @@ function Header() {
   const router = usePathname();
   const query = router.split("/");
   const type = query[2];
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const selectedProfileID = useAppSelector(
     (state) => state.profiles.selectedProfileID
   );
@@ -37,7 +36,7 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
