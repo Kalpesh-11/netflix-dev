@@ -1,3 +1,4 @@
+"use client";
 import { MovieCardProps, MovieDetailsProps } from "@/types";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
