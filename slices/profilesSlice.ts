@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { profiles } from "@/constants";
 import { ProfilesProps } from "@/types";
 
-const profileList: ProfilesProps = {
+const profileList: any = {
   profiles,
 };
 const selectedProfileID = null;
