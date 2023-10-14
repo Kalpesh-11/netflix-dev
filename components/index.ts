@@ -9,6 +9,7 @@ import SubHeader from "./SubHeader";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";
+import SearchBox from "./SearchBox";
 export {
   ProfileList,
   Hero,
@@ -21,4 +22,5 @@ export {
   Header,
   SubHeader,
   Footer,
+  SearchBox,
 };

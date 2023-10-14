@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-// import { profiles } from "@/constants";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setProfile } from "@/slices/profilesSlice";
 import { ProfilesProps, ProfileListProps } from "@/types";
@@ -9,9 +6,6 @@ import { GrEdit } from "react-icons/gr";
 function ProfileList({ isEdit }: ProfileListProps) {
   const { profiles }: ProfilesProps = useAppSelector(
     (state) => state.profiles.profileList
-  );
-  const selectedProfileID = useAppSelector(
-    (state) => state.profiles.selectedProfileID
   );
   const dispatch = useAppDispatch();
   return (
@@ -50,21 +44,6 @@ function ProfileList({ isEdit }: ProfileListProps) {
           );
         })}
       </ul>
-      {/* {true !== isEdit ? (
-        <a
-          className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
-          href="/ManageProfile"
-        >
-          Manage Profiles
-        </a>
-      ) : (
-        <a
-          className="bg-transparent ring-1 ring-secondary-grey text-secondary-grey py-2 px-6 max-w-max mt-10"
-          href="/"
-        >
-          Done
-        </a>
-      )} */}
     </div>
   );
 }

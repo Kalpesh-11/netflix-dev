@@ -10,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import { useScrollTrigger } from "@mui/material";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
-import { Sidebar, SubHeader } from ".";
+import { SearchBox, Sidebar, SubHeader } from ".";
 import { menus, SettingMenus } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/hooks";
@@ -67,6 +67,7 @@ function Header() {
       <AppBar position="fixed" className="netflix-header" style={style}>
         <Container maxWidth="xl" disableGutters sx={{ px: "4%" }}>
           <Toolbar disableGutters>
+            {/* DeskTop Logo */}
             <Link href="/">
               <Typography
                 variant="h6"
@@ -84,6 +85,7 @@ function Header() {
                 NETFLIX
               </Typography>
             </Link>
+            {/* Mobile Menu icon */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -99,6 +101,7 @@ function Header() {
                 <RxHamburgerMenu></RxHamburgerMenu>
               </IconButton>
             </Box>
+            {/* Mobile Logo */}
             <Typography
               variant="h5"
               noWrap
@@ -116,6 +119,11 @@ function Header() {
             >
               NETFLIX
             </Typography>
+            {/* Mobile search */}
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              {/* <SearchBox isDesktop={false} /> */}
+            </Box>
+            {/* Desktop nav Menu */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {Object.entries(menus).map(([title, link], index) => (
                 <Link
@@ -129,7 +137,9 @@ function Header() {
                 </Link>
               ))}
             </Box>
+            {/* Desktop profile Menu & Search*/}
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+              {/* <SearchBox isDesktop={true} /> */}
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={profile?.name}

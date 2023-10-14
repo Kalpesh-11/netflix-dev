@@ -93,3 +93,6 @@ export interface GenreProps {
   id: string;
   name: string;
 }
+export interface SearchBoxProps {
+  isDesktop: boolean;
+}
