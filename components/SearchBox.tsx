@@ -1,3 +1,4 @@
+"use client";
 import { SearchBoxProps } from "@/types";
 import { useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";

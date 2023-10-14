@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { MovieCardProps, RowProps } from "@/types";
 import { calculateColumn, getData } from "@/utils";
