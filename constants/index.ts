@@ -30,6 +30,13 @@ export const profiles = [
       Family: "10751",
       Animation: "16",
     },
+    tv: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
+    },
   },
   {
     id: "ww",
@@ -42,6 +49,13 @@ export const profiles = [
       History: "36",
       Mystery: "9648",
       Documentary: "99",
+    },
+    tv: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
     },
   },
   {
@@ -56,6 +70,13 @@ export const profiles = [
     imgSrc: "https://placehold.co/150",
     isSelected: false,
     movie: {
+      "Science Fiction": "878",
+      Adventure: "12",
+      Comedy: "35",
+      Thriller: "53",
+      Action: "28",
+    },
+    tv: {
       "Science Fiction": "878",
       Adventure: "12",
       Comedy: "35",

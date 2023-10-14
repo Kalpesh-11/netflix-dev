@@ -7,7 +7,7 @@ export interface ProfileProps {
   tv: string[];
 }
 export interface ProfilesProps {
-  profiles: ProfileProps[];
+  profiles: any;
 }
 
 export interface ProfileListProps {
