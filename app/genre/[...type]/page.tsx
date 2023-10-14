@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import { useSearchParams } from "next/navigation";
-export default function typePage({ params }: { params: { type: string[] } }) {
+export default function TypePage({ params }: { params: { type: string[] } }) {
   const [isLoading, setLoading] = useState(true);
   const [userMovies, setUserMovies] = useState<[string, string][]>([]);
   const type = params ? params.type[0] : "movie";
