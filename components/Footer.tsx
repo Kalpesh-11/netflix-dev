@@ -131,7 +131,7 @@ export default function Footer() {
           target="_blank"
           className="group-hover:text-tertiary-white-hover"
         >
-          ©2023 Kalpesh Bhagat.
+          ©2023 Kalpesh Bhagat
         </Typography>
       </Grid>
     </Grid>
