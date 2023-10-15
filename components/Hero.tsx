@@ -13,7 +13,7 @@ async function Hero({ type, genre }: HeroProps) {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div style={backgroundImage} className="hero__container absolute">
         <div className="hero__info--wrap w-[70%] px-2 py-9 flex flex-col justify-end absolute left-[4%] bottom-[20%] md:bottom-[36%] md:w-[40%] lg:bottom-[36%]">
           <h1 className="herp__info--title  truncate text-2xl font-extrabold md:text-7xl md:mb-4">

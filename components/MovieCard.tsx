@@ -20,7 +20,7 @@ function MovieCard({
   movie: MovieCardProps;
   column: number;
   isAccessible: boolean;
-  mediaType: "movie" | "tv" | "all";
+  mediaType: string;
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isExpandCard, setIsExpandCard] = useState(false);
@@ -87,7 +87,7 @@ function MovieCard({
         <Card>
           <CardMedia
             component="img"
-            alt="green iguana"
+            alt={movie.name}
             height="50"
             image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
           />
@@ -110,7 +110,7 @@ function MovieCard({
         <Card>
           <CardMedia
             component="img"
-            alt="green iguana"
+            alt={movie.name}
             height="50"
             image={process.env.NEXT_PUBLIC_IMAGE_ENDPOINT + movie.backdrop_path}
           />

@@ -92,6 +92,7 @@ export default function TypePage({ params }: { params: { type: string[] } }) {
         ) : (
           <p>Genre not found.</p>
         )}
+        <Footer />
       </main>
     </>
   );

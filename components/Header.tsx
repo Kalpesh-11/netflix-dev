@@ -52,7 +52,6 @@ function Header() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window : undefined,
   });
   const style = {
     backgroundColor: trigger ? "rgb(20, 20, 20)" : "transparent",
@@ -60,7 +59,9 @@ function Header() {
     boxShadow: "unset",
     transition: "all 0.4",
   };
-
+  if (!profile) {
+    return;
+  }
   return (
     <>
       <AppBar position="fixed" className="netflix-header" style={style}>
@@ -120,7 +121,7 @@ function Header() {
             </Typography>
             {/* Mobile search */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              {/* <SearchBox isDesktop={false} /> */}
+              <SearchBox isDesktop={false} />
             </Box>
             {/* Desktop nav Menu */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -138,7 +139,7 @@ function Header() {
             </Box>
             {/* Desktop profile Menu & Search*/}
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              {/* <SearchBox isDesktop={true} /> */}
+              <SearchBox isDesktop={true} />
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={profile?.name}

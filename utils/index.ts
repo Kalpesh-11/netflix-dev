@@ -123,3 +123,18 @@ export const getGenre = async (type: string) => {
     };
   }
 };
+export const getMovieSearch = async (searchQuery: string) => {
+  try {
+    const endpoint =
+      process.env.NEXT_PUBLIC_API_ENDPOINT +
+      `/search/multi?query=${searchQuery}&include_adult=false&language=en-US&page=1`;
+    const response = await axios.get(endpoint);
+    const movies = response.data;
+    return movies;
+  } catch (error: any) {
+    return {
+      statusCode: error.response?.status || 500,
+      data: error.response?.status_message || "An error occurred",
+    };
+  }
+};
